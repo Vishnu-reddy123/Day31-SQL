@@ -1,0 +1,153 @@
+
+mysql> create database AddressBookService;
+Query OK, 1 row affected (0.78 sec)
+--------------------------------------------
+mysql> use AddressBookService;
+Database changed
+---------------------------------------------
+mysql> create table AddressBook(
+    -> FirstName varchar(32),
+    -> LastName varchar(32),
+    -> Address varchar(32),
+    -> City varchar(32),
+    -> State varchar(32),
+    -> Zip int,
+    -> PhoneNumber varchar(12),
+    -> Email varchar(32)
+    -> );
+Query OK, 0 rows affected (1.85 sec)
+-------------------------------------
+mysql> INSERT INTO AddressBook VALUES('Vishnu','Vardhan','12-2-42/1 AlpatiNagar','Hyderabad','Telangana','123456','7013310736','vishnu95532@gmail.com'),('Vivek','Gujale','12-43/4 vishwanagar','NaviMumbai','Maharasthra','234567','6788765431','vivekhuy7891@gmail.com'),('Rahul','Rajan','12-89/2 muradnagar','Ranchi','Jharkand','90881','9088765112','rahul8765@gmail.com');
+Query OK, 3 rows affected (0.72 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+------------------------------------------------------
+mysql> select * from AddressBook;
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+
+| FirstName | LastName | Address               | City       | State       | Zip    | PhoneNumber | Email                  |
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+
+| Vishnu    | Vardhan  | 12-2-42/1 AlpatiNagar | Hyderabad  | Telangana   | 123456 | 7013310736  | vishnu95532@gmail.com  |
+| Vivek     | Gujale   | 12-43/4 vishwanagar   | NaviMumbai | Maharasthra | 234567 | 6788765431  | vivekhuy7891@gmail.com |
+| Rahul     | Rajan    | 12-89/2 muradnagar    | Ranchi     | Jharkand    |  90881 | 9088765112  | rahul8765@gmail.com    |
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+
+3 rows in set (0.00 sec)
+
+mysql> UPDATE AddressBook SET City = 'Bengaluru',State = 'Karnataka' WHERE FirstName = 'Rahul';
+Query OK, 1 row affected (0.15 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from AddressBook;
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+
+| FirstName | LastName | Address               | City       | State       | Zip    | PhoneNumber | Email                  |
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+
+| Vishnu    | Vardhan  | 12-2-42/1 AlpatiNagar | Hyderabad  | Telangana   | 123456 | 7013310736  | vishnu95532@gmail.com  |
+| Vivek     | Gujale   | 12-43/4 vishwanagar   | NaviMumbai | Maharasthra | 234567 | 6788765431  | vivekhuy7891@gmail.com |
+| Rahul     | Rajan    | 12-89/2 muradnagar    | Bengaluru  | Karnataka   |  90881 | 9088765112  | rahul8765@gmail.com    |
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+
+3 rows in set (0.00 sec)
+----------------------------------------------------------------------------------------------------------------------------------
+mysql> DELETE FROM AddressBook WHERE FirstName = 'Rahul';
+Query OK, 1 row affected (0.12 sec)
+
+mysql> select * from AddressBook;
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+
+| FirstName | LastName | Address               | City       | State       | Zip    | PhoneNumber | Email                  |
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+
+| Vishnu    | Vardhan  | 12-2-42/1 AlpatiNagar | Hyderabad  | Telangana   | 123456 | 7013310736  | vishnu95532@gmail.com  |
+| Vivek     | Gujale   | 12-43/4 vishwanagar   | NaviMumbai | Maharasthra | 234567 | 6788765431  | vivekhuy7891@gmail.com |
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+
+2 rows in set (0.00 sec)
+----------------------------------------------------------------------
+mysql> SElECT * FROM AddressBook WHERE City = 'Hyderabad' OR State = 'Maharasthra';
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+
+| FirstName | LastName | Address               | City       | State       | Zip    | PhoneNumber | Email                  |
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+
+| Vishnu    | Vardhan  | 12-2-42/1 AlpatiNagar | Hyderabad  | Telangana   | 123456 | 7013310736  | vishnu95532@gmail.com  |
+| Vivek     | Gujale   | 12-43/4 vishwanagar   | NaviMumbai | Maharasthra | 234567 | 6788765431  | vivekhuy7891@gmail.com |
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+
+2 rows in set (0.02 sec)
+----------------------------------------------------------------------------------------------------------
+mysql> SElECT * FROM AddressBook WHERE City = 'Hyderabad' AND State = 'Telangana';
++-----------+----------+-----------------------+-----------+-----------+--------+-------------+-----------------------+
+| FirstName | LastName | Address               | City      | State     | Zip    | PhoneNumber | Email                 |
++-----------+----------+-----------------------+-----------+-----------+--------+-------------+-----------------------+
+| Vishnu    | Vardhan  | 12-2-42/1 AlpatiNagar | Hyderabad | Telangana | 123456 | 7013310736  | vishnu95532@gmail.com |
++-----------+----------+-----------------------+-----------+-----------+--------+-------------+-----------------------+
+1 row in set (0.00 sec)
+------------------------------------------------------------------------------
+mysql> SELECT FirstName,LastName FROM AddressBook ORDER BY City;
++-----------+----------+
+| FirstName | LastName |
++-----------+----------+
+| Vishnu    | Vardhan  |
+| Vivek     | Gujale   |
++-----------+----------+
+2 rows in set (0.09 sec)
+-----------------------------------------------------------------------------------
+mysql> ALTER TABLE addressbook ADD Family varchar(32);
+Query OK, 0 rows affected (2.23 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE addressbook ADD Friends varchar(32);
+Query OK, 0 rows affected (0.54 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE addressbook ADD Profession varchar(32);
+Query OK, 0 rows affected (0.21 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from addressbook;
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+--------+---------+------------+
+| FirstName | LastName | Address               | City       | State       | Zip    | PhoneNumber | Email                  | Family | Friends | Profession |
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+--------+---------+------------+
+| Vishnu    | Vardhan  | 12-2-42/1 AlpatiNagar | Hyderabad  | Telangana   | 123456 | 7013310736  | vishnu95532@gmail.com  | NULL   | NULL    | NULL       |
+| Vivek     | Gujale   | 12-43/4 vishwanagar   | NaviMumbai | Maharasthra | 234567 | 6788765431  | vivekhuy7891@gmail.com | NULL   | NULL    | NULL       |
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+--------+---------+------------+
+2 rows in set (0.00 sec)
+------------------------------------------------------------------------------------------------------------------------------
+mysql> UPDATE addressbook SET Family = 'Sagar',Friends = 'Shubam',Profession = 'Architect' WHERE FirstName = 'Vivek';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE addressbook SET Family = 'Rahul',Friends = 'Mahesh babu',Profession = 'Devops Engineer' WHERE FirstName = 'Vishnu';
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressbook;
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+--------+-------------+-----------------+
+| FirstName | LastName | Address               | City       | State       | Zip    | PhoneNumber | Email                  | Family | Friends     | Profession      |
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+--------+-------------+-----------------+
+| Vishnu    | Vardhan  | 12-2-42/1 AlpatiNagar | Hyderabad  | Telangana   | 123456 | 7013310736  | vishnu95532@gmail.com  | Rahul  | Mahesh babu | Devops Engineer |
+| Vivek     | Gujale   | 12-43/4 vishwanagar   | NaviMumbai | Maharasthra | 234567 | 6788765431  | vivekhuy7891@gmail.com | Sagar  | Shubam      | Architect       |
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+--------+-------------+-----------------+
+2 rows in set (0.00 sec)
+----------------------------------------------------------------------------------------------------------
+mysql> SELECT COUNT(FirstName) FROM AddressBook;
++------------------+
+| COUNT(FirstName) |
++------------------+
+|                2 |
++------------------+
+1 row in set (0.05 sec)
+------------------------------------------------------------------------------------------------------------
+mysql> ALTER TABLE addressbook ADD ContactPerson varchar(32);
+Query OK, 0 rows affected (0.19 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from addressbook;
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+--------+-------------+-----------------+---------------+
+| FirstName | LastName | Address               | City       | State       | Zip    | PhoneNumber | Email                  | Family | Friends     | Profession      | ContactPerson |
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+--------+-------------+-----------------+---------------+
+| Vishnu    | Vardhan  | 12-2-42/1 AlpatiNagar | Hyderabad  | Telangana   | 123456 | 7013310736  | vishnu95532@gmail.com  | Rahul  | Mahesh babu | Devops Engineer | NULL          |
+| Vivek     | Gujale   | 12-43/4 vishwanagar   | NaviMumbai | Maharasthra | 234567 | 6788765431  | vivekhuy7891@gmail.com | Sagar  | Shubam      | Architect       | NULL          |
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+--------+-------------+-----------------+---------------+
+2 rows in set (0.00 sec)
+mysql> select * from addressbook;
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+--------+-------------+-----------------+---------------+
+| FirstName | LastName | Address               | City       | State       | Zip    | PhoneNumber | Email                  | Family | Friends     | Profession      | ContactPerson |
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+--------+-------------+-----------------+---------------+
+| Vishnu    | Vardhan  | 12-2-42/1 AlpatiNagar | Hyderabad  | Telangana   | 123456 | 7013310736  | vishnu95532@gmail.com  | Rahul  | Mahesh babu | Devops Engineer | RAHUL         |
+| Vivek     | Gujale   | 12-43/4 vishwanagar   | NaviMumbai | Maharasthra | 234567 | 6788765431  | vivekhuy7891@gmail.com | Sagar  | Shubam      | Architect       | RAJAN         |
++-----------+----------+-----------------------+------------+-------------+--------+-------------+------------------------+--------+-------------+-----------------+---------------+
+2 rows in set (0.00 sec)
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
